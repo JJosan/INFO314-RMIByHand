@@ -29,8 +29,19 @@ public class Client {
             Response res = (Response) ois.readObject();
             result = (int) res.getResult();
 
-        } catch (Exception e) {
+            // close sockets
+            socket.close();
+            oos.close();
+            ois.close();
+            os.close();
+            is.close();
 
+        } catch (Exception e) {
+            if (e.getMessage().equals("Connection refused")) {
+                System.out.println("Cannot connect to server");
+            } else {
+                e.printStackTrace();
+            }
         }
         return result;
     }
@@ -38,6 +49,8 @@ public class Client {
      * This method name and parameters must remain as-is
      */
     public static int divide(int num, int denom) {
+        if (denom == 0)
+            throw new ArithmeticException();
         int result = -1;
         try {
             // open socket
@@ -60,8 +73,19 @@ public class Client {
             Response res = (Response) ois.readObject();
             result = (int) res.getResult();
 
-        } catch (Exception e) {
+            // close sockets
+            socket.close();
+            oos.close();
+            ois.close();
+            os.close();
+            is.close();
 
+        } catch (Exception e) {
+            if (e.getMessage().equals("Connection refused")) {
+                System.out.println("Cannot connect to server");
+            } else {
+                e.printStackTrace();
+            }
         }
         return result;
     }
@@ -91,8 +115,19 @@ public class Client {
             Response res = (Response) ois.readObject();
             result = (String) res.getResult();
 
+            // close sockets
+            socket.close();
+            oos.close();
+            ois.close();
+            os.close();
+            is.close();
+            
         } catch (Exception e) {
-
+            if (e.getMessage().equals("Connection refused")) {
+                System.out.println("Cannot connect to server");
+            } else {
+                e.printStackTrace();
+            }
         }
         return result;
     }
