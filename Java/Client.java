@@ -1,22 +1,100 @@
+import java.io.*;
+import java.net.*;
+
 public class Client {
 
     /**
      * This method name and parameters must remain as-is
      */
     public static int add(int lhs, int rhs) {
-        return -1;
+        int result = -1;
+        try {
+            // open socket
+            Socket socket = new Socket("localhost", PORT);
+
+            // create object to send
+            String methodName = "add";
+            Object[] args = {lhs, rhs};
+            Request req = new Request(methodName, args);
+
+            // send request
+            OutputStream os = socket.getOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(os);
+            oos.writeObject(req);
+            oos.flush();
+
+            // read response
+            InputStream is = socket.getInputStream();
+            ObjectInputStream ois = new ObjectInputStream(is);
+            Response res = (Response) ois.readObject();
+            result = (int) res.getResult();
+
+        } catch (Exception e) {
+
+        }
+        return result;
     }
     /**
      * This method name and parameters must remain as-is
      */
     public static int divide(int num, int denom) {
-        return -1;
+        int result = -1;
+        try {
+            // open socket
+            Socket socket = new Socket("localhost", PORT);
+
+            // create object to send
+            String methodName = "divide";
+            Object[] args = {num, denom};
+            Request req = new Request(methodName, args);
+
+            // send request
+            OutputStream os = socket.getOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(os);
+            oos.writeObject(req);
+            oos.flush();
+
+            // read response
+            InputStream is = socket.getInputStream();
+            ObjectInputStream ois = new ObjectInputStream(is);
+            Response res = (Response) ois.readObject();
+            result = (int) res.getResult();
+
+        } catch (Exception e) {
+
+        }
+        return result;
     }
     /**
      * This method name and parameters must remain as-is
      */
     public static String echo(String message) {
-        return "";
+        String result = "";
+        try {
+            // open socket
+            Socket socket = new Socket("localhost", PORT);
+
+            // create object to send
+            String methodName = "echo";
+            Object[] args = {message};
+            Request req = new Request(methodName, args);
+
+            // send request
+            OutputStream os = socket.getOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(os);
+            oos.writeObject(req);
+            oos.flush();
+
+            // read response
+            InputStream is = socket.getInputStream();
+            ObjectInputStream ois = new ObjectInputStream(is);
+            Response res = (Response) ois.readObject();
+            result = (String) res.getResult();
+
+        } catch (Exception e) {
+
+        }
+        return result;
     }
 
     // Do not modify any code below this line
